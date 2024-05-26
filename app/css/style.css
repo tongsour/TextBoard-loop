@@ -1,0 +1,181 @@
+/* font pixel */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+/* Global style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+/* Styles for portrait iphone 14 pro max */
+body {
+    background-color: #fff;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    height: 100vh;
+}
+
+header {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 20px;
+    color: #333;
+}
+
+canvas {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: auto;
+}
+/* Styles for max-w430 phone portrait style */
+@media only screen and (max-width: 430px) and (orientation: portrait) {
+    .header-dialog div > span.welcome {
+        display: none; /* Hide the .welcome element */
+    }
+}
+
+.modal-parent {
+    position: fixed;
+    background-color: rgb(230, 230, 230);
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal {
+    background: white;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-family: arial;
+    position: relative;
+    animation: 1s drop;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes drop {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.X {
+    /* position: absolute;
+    right: 20px;
+    top: 20px; */
+    cursor: pointer;
+
+}
+
+section {
+    transition: 2s;
+}
+
+.center {
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.header-dialog{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* Styles for setting-controls */
+.setting-controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+}
+
+#canvasContainer {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#userText {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#direction {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+}
+/* Keyframes for right to left animation */
+@keyframes moveRightToLeft {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-100%); 
+    }
+}
+
+/* Apply the animation to the .welcome element */
+.welcome {
+    width: 100%;
+    display: inline-block; 
+    white-space: nowrap; 
+    animation: moveRightToLeft 5s linear infinite; 
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
