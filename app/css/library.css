@@ -1,0 +1,100 @@
+/* Container styles */
+.tabs {
+    width: 100%;
+    margin: 2rem auto; 
+    background-color: white; /* bg-white */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 1.125rem; /* text-lg */
+}
+
+/* Flexbox layout */
+.flex {
+    display: flex;
+}
+.flex-co{
+    flex-direction: column;
+}
+
+/* Justify content */
+.justify-between {
+    justify-content: space-between;
+}
+
+/* List items */
+.w-full {
+    width: 100%;
+}
+
+/* Links */
+.block {
+    display: block;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-gray-500 {
+    background-color: #6b7280;
+}
+
+.hover\:bg-gray-300:hover {
+    background-color: #d1d5db;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.rounded- {
+    border-radius: 0.375rem;
+}
+
+/* Padding */
+.p-4 {
+    padding: 1rem;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Font size */
+.text {
+    font-size: var(--font-size, 16px); /* Default font size if not set */
+}
+/* Optional: Helper classes to set custom font sizes */
+.text-20 {
+    --font-size: 20px;
+}
+
+.text-25 {
+    --font-size: 25px;
+}
+
+.text-30 {
+    --font-size: 30px;
+}
+
+.text-40 {
+    --font-size: 40px;
+}
+
+.text-50 {
+    --font-size: 50px;
+}
+
+.text-60 {
+    --font-size: 60px;
+}
