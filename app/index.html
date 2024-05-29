@@ -93,8 +93,21 @@
                             <option value="left">Right to Left</option>
                         </select>
                     </div>
+                    <div class="flex flex-co w-full">
+                        <label for="spaceBetween">Space Between Letters (px)</label>
+                        <input class="userText" type="number" id="spaceBetween" min="1" max="50" value="1">
+                    </div>
+                    <div class="flex flex-co w-full">
+                        <label for="speed">Animation Speed</label>
+                        <select id="speed">
+                            <option value="1">Default</option>
+                            <option value="2">Fast (x2)</option>
+                            <option value="4">Fastest (x4)</option>
+                        </select>
+                    </div>
                     <button onclick="startAnimation(); closeDialog()" id="bnt-ani" class="my-btn-sty">Start Animation</button>
                 </div>
+                
             </div>
         </div>
     </div>
