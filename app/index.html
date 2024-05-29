@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="css/library.css">
     <!-- title -->
     <title>LED TEXT</title>
-
-    <style>
-
-    </style>
 </head>
 
 <body><br>
@@ -26,7 +22,7 @@
     <!-- main container -->
     <main class="container">
         <!-- text for display -->
-        <canvas id="myCanvas"></canvas>
+        <canvas id="myCanvas" width="800" height="200"></canvas>
     </main>
 
     <!-- my dialog -->
@@ -40,60 +36,85 @@
                 <div>
                     <span class="welcome">Welcome To LED display</span>
                 </div>
-                <div class="X" draggable="true">
+                <div class="X" onclick="openDialog()">
                     <i class='bx bx-x'></i>
                 </div>
-            </div>
+            </div><br>
+            <div class="tab w-full">
+                <button class="tablinks active w-full my-btn-sty1" onclick="openTab(event, 'tabs-1')">Text</button>
+                <button class="tablinks w-full my-btn-sty2" onclick="openTab(event, 'tabs-2')">Style</button>
+                <button class="tablinks w-full my-btn-sty3" onclick="openTab(event, 'tabs-3')">About us</button>
+            </div><br>
             <!-- for setting text and style input -->
             <div class="setting-controls">
-                <div class="tabs max-w-screen-md mx-auto mt-8 bg-white rounded-md shadow-md text-lg">
-                    <ul class="flex justify-between">
-                        <li class="w-full">
-                            <a href="#tabs-1"
-                                class="block py-2 px-4 text-center bg-gray-500 hover:bg-gray-300 font-semibold">TEXT</a>
-                        </li>
-                        <li class="w-full">
-                            <a href="#tabs-2"
-                                class="block py-2 px-4 text-center bg-gray-500 hover:bg-gray-300 font-semibold">Style</a>
-                        </li>
-                        <li class="w-full">
-                            <a href="#tabs-3"
-                                class="block py-2 px-4 text-center bg-gray-500 hover:bg-gray-300 font-semibold">About</a>
-                        </li>
-                    </ul>
-                    <div id="tabs-1" class="p-4">
-                        <div id="canvasContainer">
-                            <input type="text" id="userText" placeholder="Enter your text here">
-                            <button onclick="startAnimation();closeDialog()">Start Animation</button>
+                <div id="tabs-1" class="tabcontent active" style="overflow: scroll;">
+                    <!-- text input -->
+                    <div class="flex flex-co w-full">
+                        <label for="userText">Input</label>
+                        <input class="userText" type="text" id="userText" placeholder="Enter your text here">
+                    </div>
+                    <!--  -->
+                    <div class="flex flex-co w-full">
+                        <div class="flex gap-1">
+                            <div>
+                                <label for="font_weight">Font-weight</label>
+                                <select id="font_weight" class="userText">
+                                    <option value="500">Default</option>
+                                    <option value="100">100</option>
+                                    <option value="900">900</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="fontSize">Font size</label>
+                                <input class="userText" type="number" id="fontSize" value="100">
+                            </div>
+                            <div>
+                                <label for="color">Color</label>
+                                <input class="userText" type="color" id="color" value="#000000" style="height: 40px;">
+                            </div>
                         </div>
                     </div>
-                    <div id="tabs-2" class="hidden p-4">
-                        <div id="canvasContainer">
+                    <div class="flex flex-co w-full">
+                        <label for="fontStyle">Font Style</label>
+                        <select id="fontStyle" class="userText">
+                            <option value="Pixelify Sans">Default</option>
+                            <option value="sans-serif">Sans</option>
+                            <option value="serif">Serif</option>
+                            <option value="monospace">Monospace</option>
+                        </select>
+                    </div>
+                    <button onclick="startAnimation(); closeDialog()" id="bnt-ani" class="my-btn-sty">Start Animation</button>
+                </div>
+                <div id="tabs-2" class="tabcontent">
+                    <div class="flex flex-co w-full">
+                        <label for="direction">Animation</label>
                         <select id="direction">
                             <option value="right">Left to Right</option>
                             <option value="left">Right to Left</option>
                         </select>
-                        </div>
                     </div>
-                    <div id="tabs-3" class="hidden p-4">
-    
-                    </div>
+                    <button onclick="startAnimation(); closeDialog()" id="bnt-ani" class="my-btn-sty">Start Animation</button>
                 </div>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                <script>
-                    $('.tabs > ul > li > a').click(function () {
-                        $('.tabs > ul > li > a').removeClass('bg-gray-500').addClass('bg-gray-500').css('bg-black');
-                        $(this).removeClass('bg-gray-500').addClass('bg-white').css('bg-white');
-                        const thisTab = $(this).attr("href");
-                        $('.tabs > div:visible').fadeOut(200, function () {
-                            $(thisTab).fadeIn(200);
-                        });
-                    });
-                </script>
-
             </div>
         </div>
     </div>
+
+    <script>
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
     <!-- Link the JavaScript file -->
     <script src="js/index.js"></script>
     <script src="js/animation.js"></script>
