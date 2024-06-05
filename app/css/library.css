@@ -1,18 +1,19 @@
-/* Container styles */
-.tabs {
-    width: 100%;
-    margin: 2rem auto; 
-    background-color: white; /* bg-white */
-    border-radius: 0.375rem; /* rounded-md */
-    font-size: 1.125rem; /* text-lg */
-}
 
 /* Flexbox layout */
 .flex {
     display: flex;
 }
+.gap-1{
+    gap: 20px;
+}
+.item-center{
+    text-align: center;
+}
 .flex-co{
     flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
 }
 
 /* Justify content */

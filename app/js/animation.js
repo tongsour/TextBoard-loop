@@ -1,11 +1,9 @@
-
-// 
 let canvas, context;
 let x, y;
 let direction;
 let userText;
 let animationFrameId;
-
+let fontSize, color, fontStyle, font_weight;
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -19,22 +17,25 @@ function drawText() {
     // Clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Set random color
-    context.fillStyle = getRandomColor();
+    // Set color
+    context.fillStyle = color;
 
     // Set font size and style
-    context.font = '50px Pixelify Sans';
+    context.font = `${fontSize}px ${fontStyle}`;
+
+    //set font font-weight
+    context.fontWeight = `${font_weight}`;
 
     // Draw the text
     context.fillText(userText, x, y);
 
     if (direction === 'right') {
-        x += 0.5;
+        x += 1;
         if (x > canvas.width) {
             x = -context.measureText(userText).width;
         }
     } else {
-        x -= 0.5;
+        x -= 1;
         if (x < -context.measureText(userText).width) {
             x = canvas.width;
         }
@@ -44,9 +45,13 @@ function drawText() {
 }
 
 function startAnimation() {
-    // Get user input and direction
+    // Get user input values
     userText = document.getElementById('userText').value;
     direction = document.getElementById('direction').value;
+    fontSize = document.getElementById('fontSize').value;
+    color = document.getElementById('color').value;
+    fontStyle = document.getElementById('fontStyle').value;
+    font_weight = document.getElementById('font_weight').value;
 
     // Initialize position
     if (direction === 'right') {
@@ -54,7 +59,7 @@ function startAnimation() {
     } else {
         x = canvas.width;
     }
-    y = canvas.height / 2;
+    y = canvas.height / 1.2;
 
     // Cancel any existing animation frames
     if (animationFrameId) {
@@ -64,6 +69,178 @@ function startAnimation() {
     // Start the animation
     drawText();
 }
+
+window.onload = function () {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+}
+
+// adding spaceBetween text
+let spaceBetween;
+
+function drawText() {
+    // Clear the canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set color
+    context.fillStyle = color;
+
+    // Set font size and style
+    context.font = `${font_weight} ${fontSize}px ${fontStyle}`;
+
+    // Calculate the width of each character and add spacing
+    let currentX = x;
+    for (let i = 0; i < userText.length; i++) {
+        context.fillText(userText[i], currentX, y);
+        currentX += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    if (direction === 'right') {
+        x += 1;
+        if (x > canvas.width) {
+            x = -context.measureText(userText).width;
+        }
+    } else {
+        x -= 1;
+        if (x < -context.measureText(userText).width) {
+            x = canvas.width;
+        }
+    }
+
+    animationFrameId = requestAnimationFrame(drawText);
+}
+
+function startAnimation() {
+    // Get user input values
+    userText = document.getElementById('userText').value;
+    direction = document.getElementById('direction').value;
+    fontSize = document.getElementById('fontSize').value;
+    color = document.getElementById('color').value;
+    fontStyle = document.getElementById('fontStyle').value;
+    font_weight = document.getElementById('font_weight').value;
+    spaceBetween = parseInt(document.getElementById('spaceBetween').value) || 1;
+
+    // Initialize position
+    if (direction === 'right') {
+        x = -context.measureText(userText).width;
+    } else {
+        x = canvas.width;
+    }
+    y = canvas.height / 1.2;
+
+    // Cancel any existing animation frames
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
+    // Start the animation
+    drawText();
+}
+
+function drawText() {
+    // Clear the canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set font properties
+    context.font = `${font_weight} ${fontSize}px ${fontStyle}`;
+
+    // Set color
+    context.fillStyle = color;
+
+    // Calculate and draw text with spaces
+    let currentX = x;
+    for (let i = 0; i < userText.length; i++) {
+        context.fillText(userText[i], currentX, y);
+        currentX += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    // Update position for animation
+    const step = speed;
+    if (direction === 'right') {
+        x += step;
+        if (currentX > canvas.width) {
+            x = -context.measureText(userText).width - spaceBetween * userText.length;
+        }
+    } else {
+        x -= step;
+        if (x < -context.measureText(userText).width - spaceBetween * userText.length) {
+            x = canvas.width;
+        }
+    }
+
+    // Request next animation frame
+    animationFrameId = requestAnimationFrame(drawText);
+}
+
+function drawText() {
+    // Clear the canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set font properties
+    context.font = `${font_weight} ${fontSize}px ${fontStyle}`;
+
+    // Set color
+    context.fillStyle = color;
+
+    // Calculate the total width of the text string including spaces
+    let totalWidth = 0;
+    for (let i = 0; i < userText.length; i++) {
+        totalWidth += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    // Draw the text
+    let currentX = x;
+    for (let i = 0; i < userText.length; i++) {
+        context.fillText(userText[i], currentX, y);
+        currentX += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    // Update position for animation
+    if (direction === 'right') {
+        x += speed;
+        if (x > canvas.width) {
+            x = -totalWidth;
+        }
+    } else {
+        x -= speed;
+        if (x < -totalWidth) {
+            x = canvas.width;
+        }
+    }
+
+    // Request next animation frame
+    animationFrameId = requestAnimationFrame(drawText);
+}
+// adding the speed text.
+let speed;
+function startAnimation() {
+    // Get user input values
+    userText = document.getElementById('userText').value;
+    direction = document.getElementById('direction').value;
+    fontSize = parseInt(document.getElementById('fontSize').value, 10);
+    color = document.getElementById('color').value;
+    fontStyle = document.getElementById('fontStyle').value;
+    font_weight = document.getElementById('font_weight').value;
+    spaceBetween = parseInt(document.getElementById('spaceBetween').value, 10);
+    speed = parseFloat(document.getElementById('speed').value);
+
+    // Initialize position
+    if (direction === 'right') {
+        x = -context.measureText(userText).width - spaceBetween * userText.length;
+    } else {
+        x = canvas.width;
+    }
+    y = canvas.height / 1.2;
+
+    // Cancel any existing animation frames
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
+    // Start the animation
+    drawText();
+}
+
 
 window.onload = function () {
     canvas = document.getElementById('myCanvas');
