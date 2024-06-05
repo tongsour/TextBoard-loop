@@ -4,7 +4,6 @@ let direction;
 let userText;
 let animationFrameId;
 let fontSize, color, fontStyle, font_weight;
-
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -71,7 +70,12 @@ function startAnimation() {
     drawText();
 }
 
+window.onload = function () {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+}
 
+// adding spaceBetween text
 let spaceBetween;
 
 function drawText() {
@@ -168,6 +172,47 @@ function drawText() {
     animationFrameId = requestAnimationFrame(drawText);
 }
 
+function drawText() {
+    // Clear the canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set font properties
+    context.font = `${font_weight} ${fontSize}px ${fontStyle}`;
+
+    // Set color
+    context.fillStyle = color;
+
+    // Calculate the total width of the text string including spaces
+    let totalWidth = 0;
+    for (let i = 0; i < userText.length; i++) {
+        totalWidth += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    // Draw the text
+    let currentX = x;
+    for (let i = 0; i < userText.length; i++) {
+        context.fillText(userText[i], currentX, y);
+        currentX += context.measureText(userText[i]).width + spaceBetween;
+    }
+
+    // Update position for animation
+    if (direction === 'right') {
+        x += speed;
+        if (x > canvas.width) {
+            x = -totalWidth;
+        }
+    } else {
+        x -= speed;
+        if (x < -totalWidth) {
+            x = canvas.width;
+        }
+    }
+
+    // Request next animation frame
+    animationFrameId = requestAnimationFrame(drawText);
+}
+// adding the speed text.
+let speed;
 function startAnimation() {
     // Get user input values
     userText = document.getElementById('userText').value;
